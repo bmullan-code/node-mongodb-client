@@ -13,7 +13,7 @@ var express = require('express'),
           "instance_name": "cups-mongodb-service",
           "binding_name": null,
           "credentials": {
-            "uri": "mongodb://pcf_6464de6b73c4be80d8be32438c895560:<removed>@192.168.12.8:28000/default?authSource=admin"
+            "uri": "mongodb://<user:<password>@<ip address>:<port>/<db>"
           },
           "syslog_drain_url": "",
           "volume_mounts": [],
@@ -24,8 +24,10 @@ var express = require('express'),
     }
 */
 
+// list of mongodb providers. 
 var providers = ["user-provided","mlab","mongodb-odb"];
 
+// detect which provider is present
 var vcsProvider = function(arr,obj) {
 	var p = null;
 	arr.forEach(function(a) {
@@ -34,12 +36,11 @@ var vcsProvider = function(arr,obj) {
 	return p;
 }
 
-
 // get vcapservices variables if present.
 var vcs = process.env.VCAP_SERVICES 
 			? JSON.parse(process.env.VCAP_SERVICES) : null;
 console.log("vcs",vcs);
-// get the provider (mongodb or mlab hosted)
+// get the provider (mongodb or mlab hosted or user-provided)
 var provider =  vcs ? vcsProvider(providers,vcs) : null;
 console.log("provider",provider);
 // extract the creds 
@@ -49,9 +50,11 @@ console.log("creds",creds);
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
 
+// connect the uri or localhost if not running in PCF
 connection = mongoose.createConnection(
 	creds ? creds.uri : 'mongodb://localhost');
 
+// database list test
 connection.on('open',function(){
 	new admin(connection.db).listDatabases(function(err, result) {
 		if (err) {
