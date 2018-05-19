@@ -1,0 +1,9 @@
+applications:
+- name: node-mongodb-client
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  random-route: true
+  services:
+  - cups-mongodb-service
+  stack: cflinuxfs2

@@ -1,0 +1,27 @@
+{
+  "name": "mongodb-client",
+  "version": "1.0.0",
+  "description": "A simple nodejs mongodb client.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmullan-pivotal/node-mongodb-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bmullan-pivotal/node-mongodb-client/issues"
+  },
+  "homepage": "https://github.com/bmullan-pivotal/node-mongodb-client#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.4"
+  }
+}
