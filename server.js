@@ -56,6 +56,7 @@ connection = mongoose.createConnection(
 
 // database list test
 connection.on('open',function(){
+	console.log("Connected:",connection.readyState)
 	new admin(connection.db).listDatabases(function(err, result) {
 		if (err) {
 			console.log("mongodb connection error",err);
@@ -65,6 +66,10 @@ connection.on('open',function(){
 			console.log(result.databases);    
 		}
 	});
+})
+
+connection.on('error',function(err){
+	console.log("Connected:",err);
 })
 
 app.use(bodyParser.urlencoded({ extended: true }));

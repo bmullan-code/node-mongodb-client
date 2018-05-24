@@ -4,6 +4,7 @@ applications:
   instances: 1
   memory: 1G
   random-route: true
+  buildpack: nodejs_buildpack
   services:
   - cups-mongodb-service
   stack: cflinuxfs2

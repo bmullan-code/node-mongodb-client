@@ -1,6 +1,10 @@
 var mongoose = require('mongoose')
   admin = mongoose.mongo.Admin;  
 
+exports.connected = function(req,res) {
+	res.json({"Connected":connection.readyState});
+}  
+
 exports.list_all_databases = function(req,res) {
 	
 	new admin(connection.db).listDatabases(function(err, result) {
